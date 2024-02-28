@@ -2,6 +2,7 @@ require('dotenv').config()
 require('./config/db');
 const express = require('express')
 const app = express();
+const domain = 'https://abctestapi.com/';
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -12,7 +13,7 @@ app.use('/claims', claimsRoutes);
 try{
     const port = process.env.PORT
     app.listen(port,()=>{  
-      console.log(`Server is up and running at port ${port}`)
+      console.log(`Server is up and running on https://${domain}:${port}`)
 
 })
 }
