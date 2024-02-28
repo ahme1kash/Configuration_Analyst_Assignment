@@ -1,10 +1,8 @@
 const Claims = require('../models/claims_model');
-// CRUD operations
+
 const getAllClaims = async (req, res) => {
     try {
       const claims = await Claims.find();
-    //   console.log("Hit")
-    //   console.log(claims)
       res.json(claims);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -15,7 +13,6 @@ const getAllClaims = async (req, res) => {
 
   const getClaimById = async(req,res)=>{
     try{
-        // console.log("Hit")
         const claim_details = await Claims.findById(req.params.claim_id);
         res.status(200).json(claim_details)
 
@@ -28,9 +25,6 @@ const addNewClaim = async(req,res)=>{
     try{
         const FullName = req.body.insuredFullName
         const claim = req.body.claimNumber
-        
-        // console.log(email)
-        // console.log("Hit")
         const existingClaim = await Claims.findOne({FullName,claim})
         if (existingClaim){
             res.json("Claim has already been processed earlie")
@@ -81,7 +75,7 @@ const updateClaim = async(req,res)=>{
         const updated = await Claims.findByIdAndUpdate(
         {_id:req.params.claim_id},
         editedClaim,
-        {new:true}  // new argument is ṇecessary to update the document.
+        {new:true}  
         )
         console.log(originalClaim,updated)
         res.json(updated)
@@ -90,11 +84,9 @@ const updateClaim = async(req,res)=>{
         console.log(err.messaage)
     }
 }
-  // Add other CRUD operations here (create, update, delete)
 
   const deleteClaim = async(req,res)=>{
     try{
-        // console.log(req.params)
         const claim_removed = await Claims.findByIdAndDelete(req.params.claim_id)
         console.log(`Deleted Claim is ${claim_removed}`)
         res.status(200).json(claim_removed)
@@ -105,7 +97,7 @@ const updateClaim = async(req,res)=>{
   }
   const deleteAllClaims=async(req,res)=>{
     try{
-        // console.log("Hello")
+        
         await  Claims.deleteMany()
         res.json("All Claims Deleted")
     }
