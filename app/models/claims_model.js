@@ -48,5 +48,5 @@ const claims_schema = new mongoose.Schema({
     }
 
 
-},  { collection: 'claims' },{ versionKey: false }) // versionKey:false removes the __v:0 from mongo documents
+},  { collection: 'claims' },{ versionKey: false }) 
 module.exports = mongoose.model('claims',claims_schema)
