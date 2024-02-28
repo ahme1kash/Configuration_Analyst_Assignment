@@ -33,7 +33,6 @@ const policy_holder_schema = new mongoose.Schema({
     phoneNumber: {  
         type: String,
         required:true,
-        // unique:true,
     },
     Status:{
         type:Boolean,
@@ -48,5 +47,5 @@ const policy_holder_schema = new mongoose.Schema({
     }
 
 
-},  { collection: 'policyHolders' },{ versionKey: false }) // versionKey:false removes the __v:0 from mongo documents
+},  { collection: 'policyHolders' },{ versionKey: false })
 module.exports = mongoose.model('policyHolders',policy_holder_schema)
