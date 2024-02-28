@@ -1,9 +1,8 @@
 const Policies = require('../models/policy_model');
-// CRUD operations
+
 const getAllPolicies = async (req, res) => {
     try {
       const policies = await Policies.find();
-    //   console.log("Hit")
       console.log(policies)
       res.json(policies);
     } catch (error) {
@@ -15,7 +14,7 @@ const getAllPolicies = async (req, res) => {
 
   const getPolicyById = async(req,res)=>{
     try{
-        // console.log("Hit")
+        
         const policy_details = await Policies.findById(req.params.policy_id);
         res.status(200).json(policy_details)
 
@@ -27,9 +26,6 @@ const getAllPolicies = async (req, res) => {
 const addNewPolicy = async(req,res)=>{
     try{
         const email = req.body.email
-        //We can use email as well as phone for ensuring if the policy is not already stored in DB.
-        // console.log(email)
-        // console.log("Hit")
         const existingPolicy = await Policies.findOne({email})
         if (existingPolicy){
             res.json("Policy Already Exists")
@@ -78,8 +74,7 @@ const updatePolicy = async(req,res)=>{
         const updated = await Policies.findByIdAndUpdate(
         {_id:req.params.policy_id},
         editedPolicy,
-        {new:true}  // new argument is ṇecessary to update the document.
-        )
+        {new:true}  
         console.log(originalPolicy,updated)
         res.json(updated)
     }
@@ -87,7 +82,6 @@ const updatePolicy = async(req,res)=>{
         console.log(err.messaage)
     }
 }
-  // Add other CRUD operations here (create, update, delete)
 
   const deletePolicy = async(req,res)=>{
     try{
@@ -102,7 +96,6 @@ const updatePolicy = async(req,res)=>{
   }
   const deleteAllPolicies=async(req,res)=>{
     try{
-        // console.log("Hello")
         await  Policies.deleteMany()
         res.json("All Policies Deleted")
     }
